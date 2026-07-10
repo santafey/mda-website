@@ -11,7 +11,581 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+:root {
+      /* Paper & ink — a filing-cabinet palette, not a startup one */
+      --paper: #EEE8D8;
+      --paper-white: #F8F5EB;
+      --ink: #1C2723;
+      --ink-soft: #3C463F;
+      --stamp: #A3402F;      /* rubber-stamp red */
+      --stamp-dark: #7E2F22;
+      --ledger: #2C4A3B;     /* ledger-book green */
+      --ledger-light: #3E6552;
+      --manila: #C99A4B;     /* folder-tab tan */
+      --manila-light: #E4C583;
+      --muted: #746B58;
+      --line: rgba(28, 39, 35, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      background-image:
+        repeating-linear-gradient(to bottom, transparent, transparent 27px, var(--line) 28px);
+      background-attachment: local;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    h1, h2, h3 { font-family: 'Spectral', serif; }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* ============ FOLDER-TAB HEADER ============ */
+    header {
+      background: var(--ink);
+      color: var(--paper-white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid var(--stamp);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 0;
+    }
+
+    .logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      background: var(--stamp);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 0.3rem;
+      font-size: 0.85rem;
+      align-items: center;
+    }
+
+    nav ul li a {
+      padding: 0.55rem 0.85rem;
+      display: inline-block;
+      border-radius: 6px 6px 0 0;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.02em;
+    }
+
+    nav ul li a:hover {
+      background: var(--manila);
+      color: var(--ink);
+      transform: translateY(-2px);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      font-family: 'IBM Plex Mono', monospace;
+      transition: transform 0.12s, box-shadow 0.12s;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--stamp);
+      color: var(--paper-white);
+      box-shadow: 3px 3px 0 var(--stamp-dark);
+    }
+
+    .btn-primary:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--stamp-dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--paper-white);
+      border: 1.5px solid var(--manila);
+    }
+
+    .btn-outline:hover {
+      background: var(--manila);
+      color: var(--ink);
+    }
+
+    /* ============ HERO — LETTERHEAD ============ */
+    .hero {
+      padding: 3.5rem 0 3rem;
+      background: var(--paper-white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stamp);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 1.5px;
+      background: var(--stamp);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 3.4vw, 2.7rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--ledger);
+    }
+
+    .hero p {
+      max-width: 32rem;
+      color: var(--ink-soft);
+      margin-bottom: 1.4rem;
+      font-size: 1.02rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.6rem;
+      font-size: 0.74rem;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .badge {
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Spectral', serif;
+    }
+
+    /* Stamp badge — the signature element */
+    .stamp-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .stamp {
+      width: 190px;
+      height: 190px;
+      border: 3px solid var(--stamp);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(-9deg);
+      position: relative;
+      color: var(--stamp);
+      opacity: 0.92;
+      mix-blend-mode: multiply;
+    }
+
+    .stamp::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid var(--stamp);
+      border-radius: 50%;
+    }
+
+    .stamp-text {
+      font-family: 'IBM Plex Mono', monospace;
+      text-align: center;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      line-height: 1.5;
+    }
+
+    .stamp-text strong {
+      display: block;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      margin: 0.15rem 0;
+    }
+
+    /* Business/Student toggle card sits under the stamp on desktop */
+    .hero-card {
+      margin-top: -1.5rem;
+    }
+
+    .pill-tabs {
+      display: inline-flex;
+      border: 1px solid var(--ink);
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+
+    .pill-tabs button {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-family: 'IBM Plex Mono', monospace;
+      padding: 0.5rem 0.5rem;
+      cursor: pointer;
+      transition: background 0.15s;
+      letter-spacing: 0.04em;
+    }
+
+    .pill-tabs button + button {
+      border-left: 1px solid var(--ink);
+    }
+
+    .pill-tabs button.active {
+      background: var(--ink);
+      color: var(--paper-white);
+    }
+
+    .hero-list {
+      list-style: none;
+      font-size: 0.85rem;
+      display: grid;
+      gap: 0.35rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-list li {
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .hero-list li::before {
+      content: "§";
+      color: var(--stamp);
+      position: absolute;
+      left: 0;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* ============ SECTIONS ============ */
+    section { padding: 3.2rem 0; }
+
+    .section-title {
+      margin-bottom: 2.2rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 0.8rem;
+    }
+
+    .section-title .file-no {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--stamp);
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .section-title h2 {
+      font-size: 1.55rem;
+      font-weight: 600;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-left: auto;
+      max-width: 22rem;
+      text-align: right;
+    }
+
+    @media (max-width: 700px) {
+      .section-title { flex-wrap: wrap; }
+      .section-title p { text-align: left; margin-left: 0; }
+    }
+
+    /* Ledger-line service cards */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .card {
+      background: var(--paper-white);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--ledger);
+      padding: 1.4rem 1.3rem;
+      position: relative;
+    }
+
+    .card .ref {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--stamp);
+      letter-spacing: 0.06em;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .card small {
+      color: var(--muted);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .card h3 {
+      font-size: 1.08rem;
+      margin: 0.3rem 0 0.6rem;
+      font-weight: 600;
+    }
+
+    .card ul {
+      padding-left: 1.1rem;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+    }
+
+    .card ul li { margin-bottom: 0.3rem; }
+
+    .tag-row {
+      margin-top: 0.9rem;
+      padding-top: 0.7rem;
+      border-top: 1px dashed var(--line);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-family: 'IBM Plex Mono', monospace;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--ledger);
+      color: var(--ledger);
+      margin-right: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    /* ============ CONTACT ============ */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 1.8rem;
+      align-items: flex-start;
+    }
+
+    form {
+      background: var(--paper-white);
+      border: 1px solid var(--line);
+      padding: 1.6rem 1.5rem;
+    }
+
+    .form-header {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px dashed var(--line);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .field-group { margin-bottom: 1rem; }
+
+    label {
+      display: block;
+      font-size: 0.78rem;
+      margin-bottom: 0.3rem;
+      color: var(--ink-soft);
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.03em;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.55rem 0.1rem;
+      border: none;
+      border-bottom: 1.5px solid var(--ink);
+      background: transparent;
+      font-size: 0.92rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      border-radius: 0;
+    }
+
+    select { padding: 0.55rem 0.1rem; }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+      border: 1.5px solid var(--ink);
+      padding: 0.6rem;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--stamp);
+    }
+
+    .inline-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .helper-text {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      font-style: italic;
+      font-family: 'Spectral', serif;
+    }
+
+    .contact-info { font-size: 0.92rem; color: var(--ink-soft); }
+
+    .contact-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .contact-box {
+      background: var(--ink);
+      color: var(--paper-white);
+      padding: 1.1rem 1.2rem;
+      margin-top: 1rem;
+      font-size: 0.88rem;
+      border-left: 3px solid var(--stamp);
+    }
+
+    .contact-box a { text-decoration: underline; text-decoration-color: var(--manila); }
+
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--ink-soft);
+      color: var(--ink-soft);
+      font-size: 0.72rem;
+      font-family: 'IBM Plex Mono', monospace;
+      padding: 0.2rem 0.65rem;
+      margin-right: 0.35rem;
+      margin-top: 0.4rem;
+    }
+
+    /* ============ FOOTER — FILED STAMP ============ */
+    footer {
+      padding: 1.6rem 0 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--line);
+      position: relative;
+    }
+
+    footer .filed {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--ledger);
+      border: 1.5px solid var(--ledger);
+      padding: 0.25rem 0.7rem;
+      transform: rotate(-2deg);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.08em;
+    }
+
+    footer a { color: var(--stamp); }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 900px) {
+      .hero-inner, .contact-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .stamp-wrap { order: -1; margin-bottom: 1rem; }
+      .stamp { width: 140px; height: 140px; }
+    }
+
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .grid-3 { grid-template-columns: minmax(0, 1fr); }
+      section { padding: 2.4rem 0; }
+      .inline-fields { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
   </head>
 <body>
   <!-- HEADER -->
