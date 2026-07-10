@@ -1,0 +1,406 @@
+:root {
+  --primary: #124559;
+  --primary-light: #197aa2;
+  --accent: #f4a261;
+  --bg: #f7f9fb;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header {
+  background: var(--primary);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+
+nav ul li a {
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.25rem;
+  transition: background 0.2s;
+}
+
+nav ul li a:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #1f2933;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:hover {
+  background: #f29a4d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Hero */
+.hero {
+  padding: 3rem 0 3.5rem;
+  background: linear-gradient(135deg, #124559, #0b3a4a 55%, #0f5c7a);
+  color: var(--white);
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  max-width: 32rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.5rem;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+}
+
+.badge {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(6px);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.hero-note {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.hero-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.hero-card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.7rem;
+}
+
+.pill-tabs {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 0.15rem;
+  background: rgba(15, 23, 42, 0.6);
+  margin-bottom: 1rem;
+}
+
+.pill-tabs button {
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: #cbd5f5;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.65rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.pill-tabs button.active {
+  background: var(--accent);
+  color: #1f2933;
+  font-weight: 600;
+}
+
+.hero-list {
+  list-style: none;
+  font-size: 0.85rem;
+  display: grid;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.hero-list li::before {
+  content: "•";
+  color: var(--accent);
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+/* Sections */
+section {
+  padding: 3rem 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-title h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.section-title p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 30rem;
+  margin: 0.3rem auto 0;
+}
+
+/* Services */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 0.75rem;
+  padding: 1.3rem 1.2rem;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+}
+
+.card small {
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.card ul {
+  margin-top: 0.6rem;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.card ul li {
+  margin-bottom: 0.25rem;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #075985;
+  margin-right: 0.3rem;
+  margin-top: 0.3rem;
+}
+
+/* Contact */
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+  gap: 1.8rem;
+  align-items: flex-start;
+}
+
+form {
+  background: var(--white);
+  border-radius: 0.75rem;
+  padding: 1.4rem 1.3rem;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.field-group {
+  margin-bottom: 0.8rem;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  color: #374151;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.5rem 0.55rem;
+  border-radius: 0.4rem;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.inline-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.helper-text {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.1rem;
+}
+
+.contact-info {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.contact-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.contact-box {
+  background: #e0f2fe;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-top: 0.9rem;
+  font-size: 0.88rem;
+}
+
+.pill {
+  display: inline-block;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.6rem;
+  margin-right: 0.3rem;
+  margin-top: 0.3rem;
+}
+
+footer {
+  padding: 1.3rem 0 1.6rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+footer a {
+  color: var(--primary-light);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-inner,
+  .contact-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hero {
+    padding-top: 2.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    display: none; /* later we can add a mobile menu */
+  }
+
+  .grid-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  section {
+    padding: 2.3rem 0;
+  }
+
+  .hero {
+    padding-bottom: 2.5rem;
+  }
+}
