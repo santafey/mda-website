@@ -8,350 +8,468 @@
     name="description"
     content="Affordable admin services for businesses and students. Flexible pricing: once-off tasks, monthly retainers, or hourly rates."
   />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #124559;
-      --primary-light: #197aa2;
-      --accent: #f4a261;
-      --bg: #f7f9fb;
-      --text: #1f2933;
-      --muted: #6b7280;
-      --white: #ffffff;
+      /* Paper & ink — a filing-cabinet palette, not a startup one */
+      --paper: #EEE8D8;
+      --paper-white: #F8F5EB;
+      --ink: #1C2723;
+      --ink-soft: #3C463F;
+      --stamp: #A3402F;      /* rubber-stamp red */
+      --stamp-dark: #7E2F22;
+      --ledger: #2C4A3B;     /* ledger-book green */
+      --ledger-light: #3E6552;
+      --manila: #C99A4B;     /* folder-tab tan */
+      --manila-light: #E4C583;
+      --muted: #746B58;
+      --line: rgba(28, 39, 35, 0.18);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
       line-height: 1.6;
+      background-image:
+        repeating-linear-gradient(to bottom, transparent, transparent 27px, var(--line) 28px);
+      background-attachment: local;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
-    header {
-      background: var(--primary);
-      color: var(--white);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+    h1, h2, h3 { font-family: 'Spectral', serif; }
 
     .container {
       width: 100%;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 1rem;
+      padding: 0 1.25rem;
+    }
+
+    /* ============ FOLDER-TAB HEADER ============ */
+    header {
+      background: var(--ink);
+      color: var(--paper-white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid var(--stamp);
     }
 
     .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.8rem 0;
+      padding: 0.7rem 0;
     }
 
     .logo {
-      font-weight: 700;
-      font-size: 1.2rem;
-      letter-spacing: 0.05em;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      background: var(--stamp);
+      border-radius: 50%;
+      display: inline-block;
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 1rem;
-      font-size: 0.95rem;
+      gap: 0.3rem;
+      font-size: 0.85rem;
+      align-items: center;
     }
 
     nav ul li a {
-      padding: 0.4rem 0.6rem;
-      border-radius: 0.25rem;
-      transition: background 0.2s;
+      padding: 0.55rem 0.85rem;
+      display: inline-block;
+      border-radius: 6px 6px 0 0;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.02em;
     }
 
     nav ul li a:hover {
-      background: rgba(255, 255, 255, 0.12);
+      background: var(--manila);
+      color: var(--ink);
+      transform: translateY(-2px);
     }
 
     .btn {
       display: inline-block;
-      padding: 0.6rem 1.1rem;
-      border-radius: 999px;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2px;
       border: none;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.95rem;
-      transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+      font-size: 0.9rem;
+      font-family: 'IBM Plex Mono', monospace;
+      transition: transform 0.12s, box-shadow 0.12s;
       text-align: center;
     }
 
     .btn-primary {
-      background: var(--accent);
-      color: #1f2933;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      background: var(--stamp);
+      color: var(--paper-white);
+      box-shadow: 3px 3px 0 var(--stamp-dark);
     }
 
     .btn-primary:hover {
-      background: #f29a4d;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--stamp-dark);
     }
 
     .btn-outline {
       background: transparent;
-      color: var(--white);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: var(--paper-white);
+      border: 1.5px solid var(--manila);
     }
 
-    /* Hero */
+    .btn-outline:hover {
+      background: var(--manila);
+      color: var(--ink);
+    }
+
+    /* ============ HERO ============ */
     .hero {
-      padding: 3rem 0 3.5rem;
-      background: linear-gradient(135deg, #124559, #0b3a4a 55%, #0f5c7a);
-      color: var(--white);
+      padding: 3.2rem 0 2.8rem;
+      background: var(--paper-white);
+      border-bottom: 1px solid var(--line);
       text-align: center;
     }
 
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stamp);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 22px;
+      height: 1.5px;
+      background: var(--stamp);
+    }
+
     .hero h1 {
-      font-size: clamp(2rem, 3vw, 2.6rem);
+      font-size: clamp(2rem, 3.4vw, 2.7rem);
+      font-weight: 600;
       margin-bottom: 1rem;
+      color: var(--ink);
     }
 
     .hero p {
       max-width: 32rem;
-      color: rgba(255, 255, 255, 0.85);
-      margin-bottom: 1.5rem;
-      margin-left: auto;
-      margin-right: auto;
+      color: var(--ink-soft);
+      margin: 0 auto;
+      font-size: 1.02rem;
     }
 
-    /* Sections */
-    section {
-      padding: 3rem 0;
-    }
+    /* ============ SECTIONS ============ */
+    section { padding: 3.2rem 0; }
 
     .section-title {
-      text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 2.2rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 0.8rem;
+    }
+
+    .section-title .file-no {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--stamp);
+      letter-spacing: 0.08em;
+      white-space: nowrap;
     }
 
     .section-title h2 {
-      font-size: 1.6rem;
-      margin-bottom: 0.4rem;
+      font-size: 1.55rem;
+      font-weight: 600;
     }
 
     .section-title p {
       color: var(--muted);
-      font-size: 0.95rem;
-      max-width: 30rem;
-      margin: 0.3rem auto 0;
+      font-size: 0.92rem;
+      margin-left: auto;
+      max-width: 22rem;
+      text-align: right;
     }
 
-    /* Pricing cards */
+    @media (max-width: 700px) {
+      .section-title { flex-wrap: wrap; }
+      .section-title p { text-align: left; margin-left: 0; }
+    }
+
+    /* ============ PRICING CARDS (ledger tariff sheet) ============ */
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
+      gap: 1.4rem;
+      margin-bottom: 1rem;
     }
 
     .pricing-card {
-      background: var(--white);
-      border-radius: 0.75rem;
-      padding: 2rem 1.5rem;
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
-      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: var(--paper-white);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--ledger);
+      padding: 1.6rem 1.4rem;
       display: flex;
       flex-direction: column;
-      text-align: center;
+      position: relative;
+    }
+
+    .pricing-card .ref {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--stamp);
+      letter-spacing: 0.06em;
+      display: block;
+      margin-bottom: 0.5rem;
     }
 
     .pricing-card.featured {
-      border: 2px solid var(--accent);
-      transform: scale(1.05);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+      border-top: 3px solid var(--stamp);
+      position: relative;
+    }
+
+    .pricing-card.featured::after {
+      content: "MOST BOOKED";
+      position: absolute;
+      top: -11px;
+      right: 1.2rem;
+      background: var(--stamp);
+      color: var(--paper-white);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.55rem;
     }
 
     .pricing-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.3rem;
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
     }
 
     .pricing-card .price {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin: 1rem 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0.8rem 0;
+      border-top: 1px dashed var(--line);
+      border-bottom: 1px dashed var(--line);
+      padding: 0.6rem 0;
     }
 
     .pricing-card .price small {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       color: var(--muted);
       display: block;
-      margin-top: 0.25rem;
+      margin-top: 0.3rem;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
     }
 
-    .pricing-card p {
-      color: var(--muted);
+    .pricing-card > p {
+      color: var(--ink-soft);
       font-size: 0.9rem;
-      margin-bottom: 1.3rem;
-      flex-grow: 1;
+      margin-bottom: 1.1rem;
     }
 
     .pricing-card ul {
       list-style: none;
       text-align: left;
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
+      margin-bottom: 1.4rem;
+      font-size: 0.88rem;
+      flex-grow: 1;
     }
 
     .pricing-card ul li {
-      padding: 0.4rem 0;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+      padding: 0.45rem 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink-soft);
     }
 
     .pricing-card ul li::before {
       content: "✓";
-      color: var(--accent);
+      color: var(--ledger);
       font-weight: 700;
       margin-right: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace;
     }
 
     .pricing-card a {
       display: inline-block;
       width: 100%;
+      text-align: center;
     }
 
-    /* Service list */
+    /* ============ SERVICE BREAKDOWN (invoice-style line items) ============ */
     .service-breakdown {
-      background: var(--white);
-      border-radius: 0.75rem;
-      padding: 2rem;
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      margin-bottom: 2rem;
+      background: var(--paper-white);
+      border: 1px solid var(--line);
+      padding: 1.8rem 1.7rem;
+      margin-bottom: 1.6rem;
     }
 
     .service-breakdown h3 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: var(--primary);
+      font-size: 1.15rem;
+      margin-bottom: 1.2rem;
+      color: var(--ink);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .service-breakdown h3::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--stamp);
     }
 
     .service-items {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem;
+      gap: 1.3rem 1.8rem;
     }
 
     .service-item {
       padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+      border-bottom: 1px dashed var(--line);
     }
 
     .service-item h4 {
-      font-size: 1rem;
+      font-size: 0.98rem;
       margin-bottom: 0.3rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
     }
 
     .service-item p {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--muted);
     }
 
     .service-item .price-range {
-      color: var(--accent);
+      color: var(--stamp);
       font-weight: 600;
-      margin-top: 0.3rem;
+      margin-top: 0.4rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
     }
 
-    /* FAQ */
+    /* ============ FAQ (filed correspondence) ============ */
     .faq-item {
-      background: var(--white);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: var(--paper-white);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--ledger);
+      padding: 1.3rem 1.5rem;
+      margin-bottom: 0.9rem;
     }
 
     .faq-item h4 {
       font-size: 1rem;
       margin-bottom: 0.5rem;
-      cursor: pointer;
-      color: var(--primary);
+      color: var(--ink);
+      font-family: 'Spectral', serif;
+      font-weight: 600;
     }
 
     .faq-item p {
       font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.5;
+      color: var(--ink-soft);
+      line-height: 1.55;
     }
 
-    /* CTA */
+    /* ============ CTA — like a signed-off memo ============ */
     .cta-box {
-      background: var(--primary);
-      color: var(--white);
-      border-radius: 0.75rem;
-      padding: 2rem;
+      background: var(--ink);
+      color: var(--paper-white);
+      padding: 2.2rem 2rem;
       text-align: center;
-      margin-top: 3rem;
+      margin-top: 2.5rem;
+      border-top: 3px solid var(--stamp);
     }
 
     .cta-box h2 {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
     }
 
     .cta-box p {
       margin-bottom: 1.5rem;
-      opacity: 0.9;
+      color: rgba(248, 245, 235, 0.8);
     }
 
+    /* ============ FOOTER ============ */
     footer {
-      padding: 1.3rem 0 1.6rem;
+      padding: 1.6rem 0 2rem;
       font-size: 0.8rem;
       color: var(--muted);
       text-align: center;
+      border-top: 1px solid var(--line);
     }
 
-    footer a {
-      color: var(--primary-light);
+    footer .filed {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--ledger);
+      border: 1.5px solid var(--ledger);
+      padding: 0.25rem 0.7rem;
+      transform: rotate(-2deg);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.08em;
     }
 
-    /* Responsive */
+    footer a { color: var(--stamp); }
+
+    /* ============ RESPONSIVE ============ */
     @media (max-width: 900px) {
-      .pricing-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .pricing-card.featured {
-        transform: scale(1);
-      }
-
-      .service-items {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      .pricing-grid { grid-template-columns: minmax(0, 1fr); }
+      .pricing-card.featured { order: -1; }
+      .service-items { grid-template-columns: minmax(0, 1fr); }
     }
 
     @media (max-width: 768px) {
-      nav ul {
-        display: none;
-      }
+      nav ul { display: none; }
+      section { padding: 2.4rem 0; }
+      .hero { padding-top: 2.3rem; }
+    }
 
-      section {
-        padding: 2.3rem 0;
-      }
-
-      .hero {
-        padding-top: 2.3rem;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
     }
   </style>
 </head>
@@ -359,7 +477,7 @@
   <!-- HEADER -->
   <header>
     <div class="container nav">
-      <div class="logo">Malinga Does Admin (MDA INC)</div>
+      <div class="logo">MDA INC · FILE NO. 2024/018</div>
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -374,10 +492,11 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
+      <div class="eyebrow">Rate Card</div>
       <h1>Transparent, Flexible Pricing</h1>
       <p>
         Affordable admin support for businesses of all sizes and students.
-        Choose once‑off tasks, monthly retainers, or hourly rates.
+        Choose once-off tasks, monthly retainers, or hourly rates.
       </p>
     </div>
   </section>
@@ -386,21 +505,21 @@
   <section>
     <div class="container">
       <div class="section-title">
+        <span class="file-no">FILE D</span>
         <h2>Standard Pricing Plans</h2>
-        <p>
-          Pick a plan that works for you, or contact me for custom pricing.
-        </p>
+        <p>Pick a plan that works for you, or contact me for custom pricing.</p>
       </div>
 
       <div class="pricing-grid">
         <!-- Starter -->
         <div class="pricing-card">
+          <span class="ref">REF: PLAN-01</span>
           <h3>Starter</h3>
           <div class="price">
             R200–R1,000
             <small>per task</small>
           </div>
-          <p>Perfect for one‑off admin tasks or small businesses.</p>
+          <p>Perfect for one-off admin tasks or small businesses.</p>
           <ul>
             <li>Single invoices or purchase orders</li>
             <li>Basic document preparation</li>
@@ -412,6 +531,7 @@
 
         <!-- Popular: Monthly -->
         <div class="pricing-card featured">
+          <span class="ref">REF: PLAN-02</span>
           <h3>Monthly Retainer</h3>
           <div class="price">
             R1,500–R3,000
@@ -420,8 +540,8 @@
           <p>Best for growing businesses needing regular support.</p>
           <ul>
             <li>Monthly VAT filing</li>
-            <li>Cashbook capturing & reconciliation</li>
-            <li>Invoice & PO drafting</li>
+            <li>Cashbook capturing &amp; reconciliation</li>
+            <li>Invoice &amp; PO drafting</li>
             <li>Compliance updates</li>
             <li>5–10 hrs/month support</li>
           </ul>
@@ -430,6 +550,7 @@
 
         <!-- Premium -->
         <div class="pricing-card">
+          <span class="ref">REF: PLAN-03</span>
           <h3>Premium</h3>
           <div class="price">
             R2,000–R5,000
@@ -438,8 +559,8 @@
           <p>Full admin outsourcing for established businesses.</p>
           <ul>
             <li>Everything in Monthly Retainer</li>
-            <li>Annual CIPC & tax returns</li>
-            <li>CSD compliance & updates</li>
+            <li>Annual CIPC &amp; tax returns</li>
+            <li>CSD compliance &amp; updates</li>
             <li>Priority response (24–48 hrs)</li>
             <li>15–20 hrs/month support</li>
           </ul>
@@ -453,15 +574,14 @@
   <section>
     <div class="container">
       <div class="section-title">
+        <span class="file-no">FILE E</span>
         <h2>Service Pricing Breakdown</h2>
-        <p>
-          Costs are estimates. Exact pricing depends on complexity and volume.
-        </p>
+        <p>Costs are estimates. Exact pricing depends on complexity and volume.</p>
       </div>
 
       <!-- Business Services -->
       <div class="service-breakdown">
-        <h3>Business & Compliance Services</h3>
+        <h3>Business &amp; Compliance Services</h3>
         <div class="service-items">
           <div class="service-item">
             <h4>Annual CIPC Return Filing</h4>
@@ -483,12 +603,12 @@
 
           <div class="service-item">
             <h4>Cashbook Capturing</h4>
-            <p>Recording of monthly income & expenses into cashbook.</p>
+            <p>Recording of monthly income &amp; expenses into cashbook.</p>
             <div class="price-range">R500–R1,500 per month</div>
           </div>
 
           <div class="service-item">
-            <h4>Invoice & Purchase Order Drafting</h4>
+            <h4>Invoice &amp; Purchase Order Drafting</h4>
             <p>Creation of professional invoices and POs (per batch).</p>
             <div class="price-range">R300–R600</div>
           </div>
@@ -500,7 +620,7 @@
           </div>
 
           <div class="service-item">
-            <h4>CSD Registration & Compliance</h4>
+            <h4>CSD Registration &amp; Compliance</h4>
             <p>Setting up and maintaining CSD supplier account.</p>
             <div class="price-range">R800–R1,000 (setup)<br>R300–R500 (monthly)</div>
           </div>
@@ -515,11 +635,11 @@
 
       <!-- Student Services -->
       <div class="service-breakdown">
-        <h3>Student & CV Services</h3>
+        <h3>Student &amp; CV Services</h3>
         <div class="service-items">
           <div class="service-item">
             <h4>University/College Application</h4>
-            <p>Assistance filling & submitting applications (per institution).</p>
+            <p>Assistance filling &amp; submitting applications (per institution).</p>
             <div class="price-range">R250–R500</div>
           </div>
 
@@ -536,13 +656,13 @@
           </div>
 
           <div class="service-item">
-            <h4>CV Update & Review</h4>
+            <h4>CV Update &amp; Review</h4>
             <p>Updating an existing CV or improving layout.</p>
             <div class="price-range">R250</div>
           </div>
 
           <div class="service-item">
-            <h4>Cover Letter & Motivation Letter</h4>
+            <h4>Cover Letter &amp; Motivation Letter</h4>
             <p>Tailored letter for job or bursary application.</p>
             <div class="price-range">R300–R600</div>
           </div>
@@ -561,21 +681,23 @@
   <section>
     <div class="container">
       <div class="section-title">
+        <span class="file-no">FILE F</span>
         <h2>Frequently Asked Questions</h2>
+        <p>Straight answers on how billing, contracts, and payments work.</p>
       </div>
 
       <div class="faq-item">
         <h4>Can I mix services? (e.g., hourly + tasks)</h4>
         <p>
           Absolutely! I'm flexible with pricing. If you need a combination of monthly
-          support + one‑off tasks, we can create a custom package. Just get in touch.
+          support + one-off tasks, we can create a custom package. Just get in touch.
         </p>
       </div>
 
       <div class="faq-item">
         <h4>Do you offer a discount for annual payments?</h4>
         <p>
-          Yes! Clients who pay for a 6 or 12‑month retainer upfront typically receive
+          Yes! Clients who pay for a 6 or 12-month retainer upfront typically receive
           a 5–10% discount. Contact me to discuss.
         </p>
       </div>
@@ -584,7 +706,7 @@
         <h4>What if my needs change mid-month?</h4>
         <p>
           No problem. Retainers can be adjusted with one month's notice. If you suddenly
-          need extra hours one month, we can discuss a one‑off add-on.
+          need extra hours one month, we can discuss a one-off add-on.
         </p>
       </div>
 
@@ -608,15 +730,15 @@
         <h4>What if I only need one student application done?</h4>
         <p>
           Perfect! You can start with a single service and expand later. Pricing is
-          transparent and there's no lock-in contract for one‑off tasks.
+          transparent and there's no lock-in contract for one-off tasks.
         </p>
       </div>
 
       <div class="faq-item">
         <h4>Is there a minimum contract length?</h4>
         <p>
-          For monthly retainers, I prefer a 3‑month commitment to build a good workflow.
-          But we can discuss shorter trials if needed. One‑off tasks have no commitment.
+          For monthly retainers, I prefer a 3-month commitment to build a good workflow.
+          But we can discuss shorter trials if needed. One-off tasks have no commitment.
         </p>
       </div>
     </div>
@@ -639,10 +761,9 @@
   <!-- FOOTER -->
   <footer>
     <div class="container">
+      <div class="filed">✓ FILED &amp; ON RECORD</div>
       <p>&copy; <span id="year"></span> Malinga Does Admin (MDA INC). All rights reserved.</p>
-      <p>
-        Transparent pricing for admin support. Contact us for a custom quote.
-      </p>
+      <p>Transparent pricing for admin support. Contact us for a custom quote.</p>
     </div>
   </footer>
 
