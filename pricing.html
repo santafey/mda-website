@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pricing – Malinga Does Admin (MDA INC)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Affordable admin services for businesses and students. Flexible pricing: once-off tasks, monthly retainers, or hourly rates."
+  />
+  <style>
+    :root {
+      --primary: #124559;
+      --primary-light: #197aa2;
+      --accent: #f4a261;
+      --bg: #f7f9fb;
+      --text: #1f2933;
+      --muted: #6b7280;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      background: var(--primary);
+      color: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+
+    nav ul li a {
+      padding: 0.4rem 0.6rem;
+      border-radius: 0.25rem;
+      transition: background 0.2s;
+    }
+
+    nav ul li a:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #1f2933;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-primary:hover {
+      background: #f29a4d;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 3rem 0 3.5rem;
+      background: linear-gradient(135deg, #124559, #0b3a4a 55%, #0f5c7a);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      max-width: 32rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 1.5rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Sections */
+    section {
+      padding: 3rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-title h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 30rem;
+      margin: 0.3rem auto 0;
+    }
+
+    /* Pricing cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .pricing-card {
+      background: var(--white);
+      border-radius: 0.75rem;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .pricing-card.featured {
+      border: 2px solid var(--accent);
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .pricing-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .pricing-card .price {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 1rem 0;
+    }
+
+    .pricing-card .price small {
+      font-size: 0.7rem;
+      color: var(--muted);
+      display: block;
+      margin-top: 0.25rem;
+    }
+
+    .pricing-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.3rem;
+      flex-grow: 1;
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .pricing-card ul li {
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .pricing-card ul li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+
+    .pricing-card a {
+      display: inline-block;
+      width: 100%;
+    }
+
+    /* Service list */
+    .service-breakdown {
+      background: var(--white);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      margin-bottom: 2rem;
+    }
+
+    .service-breakdown h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .service-items {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-item {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .service-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .service-item p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .service-item .price-range {
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    /* FAQ */
+    .faq-item {
+      background: var(--white);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .faq-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      color: var(--primary);
+    }
+
+    .faq-item p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* CTA */
+    .cta-box {
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .cta-box h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-box p {
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    footer {
+      padding: 1.3rem 0 1.6rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--primary-light);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .pricing-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .pricing-card.featured {
+        transform: scale(1);
+      }
+
+      .service-items {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+
+      section {
+        padding: 2.3rem 0;
+      }
+
+      .hero {
+        padding-top: 2.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="container nav">
+      <div class="logo">Malinga Does Admin (MDA INC)</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#business-services">Services</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="index.html#contact" class="btn btn-outline">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>Transparent, Flexible Pricing</h1>
+      <p>
+        Affordable admin support for businesses of all sizes and students.
+        Choose once‑off tasks, monthly retainers, or hourly rates.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRICING PLANS -->
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Standard Pricing Plans</h2>
+        <p>
+          Pick a plan that works for you, or contact me for custom pricing.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Starter -->
+        <div class="pricing-card">
+          <h3>Starter</h3>
+          <div class="price">
+            R500–R1,500
+            <small>per task</small>
+          </div>
+          <p>Perfect for one‑off admin tasks or small businesses.</p>
+          <ul>
+            <li>Single invoices or purchase orders</li>
+            <li>Basic document preparation</li>
+            <li>CV review or light edits</li>
+            <li>Quick form filling (CIPC, SARS)</li>
+          </ul>
+          <a href="index.html#contact" class="btn btn-primary">Get started</a>
+        </div>
+
+        <!-- Popular: Monthly -->
+        <div class="pricing-card featured">
+          <h3>Monthly Retainer</h3>
+          <div class="price">
+            R2,500–R5,000
+            <small>per month</small>
+          </div>
+          <p>Best for growing businesses needing regular support.</p>
+          <ul>
+            <li>Monthly VAT filing</li>
+            <li>Cashbook capturing & reconciliation</li>
+            <li>Invoice & PO drafting</li>
+            <li>Compliance updates</li>
+            <li>5–10 hrs/month support</li>
+          </ul>
+          <a href="index.html#contact" class="btn btn-primary">Choose plan</a>
+        </div>
+
+        <!-- Premium -->
+        <div class="pricing-card">
+          <h3>Premium</h3>
+          <div class="price">
+            R6,000–R12,000
+            <small>per month</small>
+          </div>
+          <p>Full admin outsourcing for established businesses.</p>
+          <ul>
+            <li>Everything in Monthly Retainer</li>
+            <li>Annual CIPC & tax returns</li>
+            <li>CSD compliance & updates</li>
+            <li>Priority response (24–48 hrs)</li>
+            <li>15–20 hrs/month support</li>
+          </ul>
+          <a href="index.html#contact" class="btn btn-primary">Inquire</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE BREAKDOWN -->
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Service Pricing Breakdown</h2>
+        <p>
+          Costs are estimates. Exact pricing depends on complexity and volume.
+        </p>
+      </div>
+
+      <!-- Business Services -->
+      <div class="service-breakdown">
+        <h3>Business & Compliance Services</h3>
+        <div class="service-items">
+          <div class="service-item">
+            <h4>Annual CIPC Return Filing</h4>
+            <p>Complete filing of annual return on CIPC.</p>
+            <div class="price-range">R1,500–R3,000</div>
+          </div>
+
+          <div class="service-item">
+            <h4>BEO (Beneficial Ownership) Filing</h4>
+            <p>Filing of Beneficial Ownership document on CIPC.</p>
+            <div class="price-range">R800–R1,500</div>
+          </div>
+
+          <div class="service-item">
+            <h4>Monthly VAT Filing</h4>
+            <p>Preparation and submission of monthly VAT returns to SARS.</p>
+            <div class="price-range">R500–R1,000 per month</div>
+          </div>
+
+          <div class="service-item">
+            <h4>Cashbook Capturing</h4>
+            <p>Recording of monthly income & expenses into cashbook.</p>
+            <div class="price-range">R800–R1,500 per month</div>
+          </div>
+
+          <div class="service-item">
+            <h4>Invoice & Purchase Order Drafting</h4>
+            <p>Creation of professional invoices and POs (per batch).</p>
+            <div class="price-range">R300–R600</div>
+          </div>
+
+          <div class="service-item">
+            <h4>Tax Pin Application</h4>
+            <p>Assistance with obtaining a tax pin from SARS.</p>
+            <div class="price-range">R500–R1,000</div>
+          </div>
+
+          <div class="service-item">
+            <h4>CSD Registration & Compliance</h4>
+            <p>Setting up and maintaining CSD supplier account.</p>
+            <div class="price-range">R1,200–R2,000 (setup)<br>R300–R500 (monthly)</div>
+          </div>
+
+          <div class="service-item">
+            <h4>CIPC Compliance Updates</h4>
+            <p>Changes to company info, director updates, etc.</p>
+            <div class="price-range">R400–R800 per task</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Student Services -->
+      <div class="service-breakdown">
+        <h3>Student & CV Services</h3>
+        <div class="service-items">
+          <div class="service-item">
+            <h4>University/College Application</h4>
+            <p>Assistance filling & submitting applications (per institution).</p>
+            <div class="price-range">R400–R800</div>
+          </div>
+
+          <div class="service-item">
+            <h4>Bursary Application Support</h4>
+            <p>Full support from research through submission (per application).</p>
+            <div class="price-range">R600–R1,200</div>
+          </div>
+
+          <div class="service-item">
+            <h4>CV Drafting (From Scratch)</h4>
+            <p>Creating a professional CV with proper formatting.</p>
+            <div class="price-range">R800–R1,500</div>
+          </div>
+
+          <div class="service-item">
+            <h4>CV Update & Review</h4>
+            <p>Updating an existing CV or improving layout.</p>
+            <div class="price-range">R400–R800</div>
+          </div>
+
+          <div class="service-item">
+            <h4>Cover Letter & Motivation Letter</h4>
+            <p>Tailored letter for job or bursary application.</p>
+            <div class="price-range">R300–R600</div>
+          </div>
+
+          <div class="service-item">
+            <h4>Document Assistance</h4>
+            <p>Gathering and organizing supporting documents.</p>
+            <div class="price-range">R200–R500</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-item">
+        <h4>Can I mix services? (e.g., hourly + tasks)</h4>
+        <p>
+          Absolutely! I'm flexible with pricing. If you need a combination of monthly
+          support + one‑off tasks, we can create a custom package. Just get in touch.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Do you offer a discount for annual payments?</h4>
+        <p>
+          Yes! Clients who pay for a 6 or 12‑month retainer upfront typically receive
+          a 5–10% discount. Contact me to discuss.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h4>What if my needs change mid-month?</h4>
+        <p>
+          No problem. Retainers can be adjusted with one month's notice. If you suddenly
+          need extra hours one month, we can discuss a one‑off add-on.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Do you charge for initial consultations?</h4>
+        <p>
+          No! The first consultation is free. I'll ask about your needs and give you
+          a quote with no obligation.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h4>How do I pay?</h4>
+        <p>
+          I accept bank transfers, EFT, and can arrange payment plans for retainers.
+          Invoice and payment details will be provided once we confirm your package.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h4>What if I only need one student application done?</h4>
+        <p>
+          Perfect! You can start with a single service and expand later. Pricing is
+          transparent and there's no lock-in contract for one‑off tasks.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Is there a minimum contract length?</h4>
+        <p>
+          For monthly retainers, I prefer a 3‑month commitment to build a good workflow.
+          But we can discuss shorter trials if needed. One‑off tasks have no commitment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="container">
+      <div class="cta-box">
+        <h2>Ready to get started?</h2>
+        <p>
+          Contact me for a free consultation. I'll help you choose the right plan
+          and answer any questions.
+        </p>
+        <a href="index.html#contact" class="btn btn-primary">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="year"></span> Malinga Does Admin (MDA INC). All rights reserved.</p>
+      <p>
+        Transparent pricing for admin support. Contact us for a custom quote.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    const yearEl = document.getElementById("year");
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+  </script>
+</body>
+</html>
